@@ -1,3 +1,4 @@
+import AccountLinkText from "@/components/AcountLink";
 import CustomBtn from "@/components/CustomBtn";
 import CustomTextInput from "@/components/CustomTextInput";
 import TitleText from "@/components/TitleText";
@@ -31,6 +32,12 @@ const SignUpDispatch = () => {
             label="Sign Up"
             btnBorderRadius={10}
             onPress={() => {}}
+          />
+          <AccountLinkText
+            question="Have an account? "
+            isLoginSreen={false}
+            senderLink="signin"
+            senderLabel="Sign In"
           />
         </ScrollView>
       </View>

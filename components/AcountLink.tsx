@@ -10,10 +10,10 @@ const AccountLinkText = ({
   isLoginSreen = true,
 }: {
   question: string;
-  riderLink: string;
+  riderLink?: string;
   senderLink: string;
   senderLabel: string;
-  riderLabel: string;
+  riderLabel?: string;
   isLoginSreen: boolean;
 }) => {
   return (
@@ -26,7 +26,7 @@ const AccountLinkText = ({
         {isLoginSreen && (
           <>
             <Text> or </Text>
-            <Link href={riderLink}>
+            <Link href={riderLink!}>
               <Text style={styles.linkText}> {riderLabel}</Text>
             </Link>
           </>
@@ -44,7 +44,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   text: {
-    fontSize: 15,
+    fontSize: 16,
     color: "grey",
+    textAlign: "center",
   },
 });

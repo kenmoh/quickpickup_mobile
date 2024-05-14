@@ -11,6 +11,10 @@ type InputProps = {
   placeholder?: string;
   secureTextEntry?: boolean;
   keyboardType?: KeyboardTypeOptions;
+  inputBorderWidth?: number;
+  inputBorderColor?: string;
+  inputBackgroundColor?: string;
+  hasBorder?: boolean;
 };
 
 const CustomTextInput = ({
@@ -18,13 +22,24 @@ const CustomTextInput = ({
   placeholder,
   secureTextEntry,
   keyboardType,
+  inputBorderColor = "grey",
+  hasBorder = false,
+  inputBorderWidth = hasBorder ? StyleSheet.hairlineWidth : 0,
+  inputBackgroundColor = hasBorder ? "white" : "#eee",
   ...props
 }: InputProps) => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>{label}</Text>
       <TextInput
-        style={styles.textInput}
+        style={[
+          styles.textInput,
+          {
+            backgroundColor: inputBackgroundColor,
+            borderWidth: inputBorderWidth,
+            borderColor: inputBorderColor,
+          },
+        ]}
         placeholder={placeholder}
         secureTextEntry={secureTextEntry}
         keyboardType={keyboardType}
@@ -47,11 +62,11 @@ const styles = StyleSheet.create({
     paddingVertical: 7.5,
     fontSize: 15,
     paddingHorizontal: 10,
-    backgroundColor: "#eee",
     width: "100%",
     borderRadius: 5,
     color: "gray",
     marginVertical: 5,
+    alignSelf: "center",
   },
 
   text: { color: "gray", fontSize: 14, fontWeight: "bold" },

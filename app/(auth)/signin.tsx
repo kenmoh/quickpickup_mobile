@@ -31,7 +31,7 @@ const SignUpDispatch = () => {
           />
           <AccountLinkText
             isLoginSreen={true}
-            question="Don't have an account? Sign up as a "
+            question="Sign up as a "
             senderLabel="Sender"
             senderLink="/signup"
             riderLink="signupDispatch"
