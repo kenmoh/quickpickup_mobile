@@ -21,7 +21,7 @@ export default function HomeScreen() {
               color: "gray",
             }}
           >
-            Order Information
+            Send Order
           </Text>
           <View style={styles.container}>
             <View style={{ alignItems: "center" }}>

@@ -46,6 +46,7 @@ const CustomTextInput = ({
         autoComplete="off"
         autoCorrect={false}
         cursorColor={"gray"}
+        maxLength={150}
         {...props}
       />
     </View>

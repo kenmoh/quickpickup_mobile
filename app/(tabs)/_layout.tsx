@@ -42,6 +42,15 @@ export default function TabLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="orderdetails"
+        options={{
+          title: "Order Details",
+          tabBarIcon: ({ color, size }) => (
+            <AntDesign name="user" size={size} color={color} />
+          ),
+        }}
+      />
     </Tabs>
   );
 }
