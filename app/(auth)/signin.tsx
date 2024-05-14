@@ -1,45 +1,49 @@
-import { StyleSheet, Text, View } from "react-native";
+import AccountLinkText from "@/components/AcountLink";
+import CustomBtn from "@/components/CustomBtn";
+import CustomTextInput from "@/components/CustomTextInput";
+import TitleText from "@/components/TitleText";
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const SignIn = () => {
+const SignUpDispatch = () => {
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#0000CD" }}>
-      <View style={{ backgroundColor: "#0000CD", flex: 1 }} />
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={{ backgroundColor: "#fff", flex: 1, alignItems: "center" }}>
+        <View
+          style={{
+            flex: 1,
+            width: "100%",
+            borderRadius: 10,
+            padding: 20,
+            backgroundColor: "#fff",
+          }}
+        >
+          <TitleText label="Sign In" />
+          <CustomTextInput label="Email" keyboardType="email-address" />
+          <CustomTextInput label="Password" secureTextEntry={true} />
 
-      <View style={styles.container}>
-        <View style={styles.inputWrapper}>
-          <Text style={styles.text}>
-            Login
-          </Text>
+          <CustomBtn
+            btnColor="#0000CD"
+            label="Sign Up"
+            btnBorderRadius={10}
+            onPress={() => {}}
+          />
+          <AccountLinkText
+            isLoginSreen={true}
+            question="Don't have an account? Sign up as a "
+            senderLabel="Sender"
+            senderLink="/signup"
+            riderLink="signupDispatch"
+            riderLabel="Rider"
+          />
         </View>
       </View>
+      <StatusBar style="dark" />
     </SafeAreaView>
   );
 };
 
-export default SignIn;
+export default SignUpDispatch;
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "white",
-    flex: 1,
-    borderTopEndRadius: 10,
-    borderTopStartRadius: 10,
-    paddingHorizontal: 15,
-  }, 
-  inputWrapper: {
-    backgroundColor: "white",
-    flex: 1,
-    top: -250,
-    width: '100%',
-    borderRadius: 15,
-    alignItems: 'center',
-    padding:20
-    
-  },
-  text: {
-    fontWeight: 'bold',
-    fontSize: 20,
-    color: 'gray'
-  }
-});
+const styles = StyleSheet.create({});

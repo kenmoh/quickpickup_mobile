@@ -1,3 +1,4 @@
+import CustomBtn from "@/components/CustomBtn";
 import CustomTextInput from "@/components/CustomTextInput";
 import TitleText from "@/components/TitleText";
 import { StatusBar } from "expo-status-bar";
@@ -25,6 +26,12 @@ const SignUpDispatch = () => {
           <CustomTextInput label="Company Reg No." />
           <CustomTextInput label="Password" secureTextEntry={true} />
           <CustomTextInput label="Confirm Passord" secureTextEntry={true} />
+          <CustomBtn
+            btnColor="#0000CD"
+            label="Sign Up"
+            btnBorderRadius={10}
+            onPress={() => {}}
+          />
         </ScrollView>
       </View>
       <StatusBar style="dark" />

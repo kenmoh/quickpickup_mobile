@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
 const TitleText = ({ label }: { label: string }) => {
-  return <Text style={styles.text}>{label}r</Text>;
+  return <Text style={styles.text}>{label}</Text>;
 };
 
 export default TitleText;
