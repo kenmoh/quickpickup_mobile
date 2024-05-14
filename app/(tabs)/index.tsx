@@ -6,7 +6,7 @@ import { Link } from 'expo-router';
 export default function HomeScreen() {
   return (
   <SafeAreaView>
-    <Link href='landing' style={{margin: 50}}>
+    <Link href='authNav' style={{margin: 50}}>
    <Text >Sign up screen</Text>
    </Link>
   </SafeAreaView>

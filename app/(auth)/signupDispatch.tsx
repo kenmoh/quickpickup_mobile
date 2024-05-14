@@ -1,58 +1,37 @@
-import { StyleSheet, Text, View, TextInput, ScrollView } from "react-native";
+import CustomTextInput from "@/components/CustomTextInput";
+import TitleText from "@/components/TitleText";
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const SignUpDispatch = () => {
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#0000CD" }}>
-      <View style={{ backgroundColor: "#0000CD", flex: 1 }} />
-
-      <View style={styles.container}>
-        <View style={styles.inputWrapper}>
-        <Text style={styles.text}>
-            Sign Up | Dispatch
-          </Text>
-          <TextInput placeholder="Email" style={{paddingVertical: 10, fontSize:15, paddingHorizontal: 10, backgroundColor: '#eee', width:'100%', borderRadius: 5, color: 'gray', marginVertical:5}}/>
-
-          <TextInput placeholder="Company Name" style={{paddingVertical: 10, fontSize:15, paddingHorizontal: 10, backgroundColor: '#eee', width:'100%', borderRadius: 5, color: 'gray', marginVertical:5}}/>
-
-          <TextInput placeholder="Company Reg. Number" style={{paddingVertical: 10, fontSize:15, paddingHorizontal: 10, backgroundColor: '#eee', width:'100%', borderRadius: 5, color: 'gray', marginVertical:5}}/>
-
-          <TextInput placeholder="Password" style={{paddingVertical: 10, fontSize:15, paddingHorizontal: 10, backgroundColor: '#eee', width:'100%', borderRadius: 5, color: 'gray', marginVertical:5}}/>
-          <TextInput placeholder="Password" style={{paddingVertical: 10, fontSize:15, paddingHorizontal: 10, backgroundColor: '#eee', width:'100%', borderRadius: 5, color: 'gray', marginVertical:5}}/>
-
-          <TextInput placeholder="Password" style={{paddingVertical: 10, fontSize:15, paddingHorizontal: 10, backgroundColor: '#eee', width:'100%', borderRadius: 5, color: 'gray', marginVertical:5}}/>
-          
-        </View>
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={{ backgroundColor: "#fff", flex: 1, alignItems: "center" }}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={{
+            flex: 1,
+            width: "100%",
+            borderRadius: 10,
+            padding: 20,
+            backgroundColor: "#fff",
+          }}
+        >
+          <TitleText label="Signup | Rider" />
+          <CustomTextInput label="Email" keyboardType="email-address" />
+          <CustomTextInput label="Phone Number" keyboardType="phone-pad" />
+          <CustomTextInput label="Company Name" />
+          <CustomTextInput label="Company Reg No." />
+          <CustomTextInput label="Password" secureTextEntry={true} />
+          <CustomTextInput label="Confirm Passord" secureTextEntry={true} />
+        </ScrollView>
       </View>
+      <StatusBar style="dark" />
     </SafeAreaView>
   );
 };
 
 export default SignUpDispatch;
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "white",
-    flex: 1,
-    borderTopEndRadius: 10,
-    borderTopStartRadius: 10,
-    paddingHorizontal: 15,
-  }, 
-  inputWrapper: {
-    backgroundColor: "white",
-    height: 800,
-    top: -180,
-    width: '100%',
-    borderRadius: 15,
-    alignItems: 'center',
-    padding:20,
-    
-    
-  },
-  text: {
-    fontWeight: 'bold',
-    fontSize: 20,
-    color: 'gray',
-    marginBottom: 10
-  }
-});
+const styles = StyleSheet.create({});

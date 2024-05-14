@@ -3,7 +3,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Link, router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 
-const Landing = () => {
+const AuthNav = () => {
   return (
     <SafeAreaView style={styles.container}>
         <View style={{flex: 1}}/>
@@ -26,7 +26,7 @@ const Landing = () => {
   );
 };
 
-export default Landing;
+export default AuthNav;
 
 const styles = StyleSheet.create({
   container: {
