@@ -10,6 +10,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { AntDesign, Feather, MaterialCommunityIcons } from "@expo/vector-icons";
 import Divider from "@/components/Divider";
 import DetailLabel from "@/components/DetailLabel";
+import Status from "@/components/Status";
 
 export default function HomeScreen() {
   return (
@@ -30,17 +31,33 @@ export default function HomeScreen() {
           >
             Order Details
           </Text>
-          <Text
+          <View
             style={{
               marginBottom: 25,
-              textTransform: "uppercase",
-              fontSize: 16,
-              fontWeight: "bold",
-              color: "gray",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
             }}
           >
-            Status:
-          </Text>
+            <Text
+              style={{
+                textTransform: "uppercase",
+                fontSize: 16,
+                fontWeight: "bold",
+                color: "gray",
+              }}
+            >
+              Status:
+            </Text>
+            <Status
+              text="Pending"
+              backgroundColor="red"
+              pillWidth={90}
+              pVertical={5}
+              pHorizontal={6}
+              textColor="white"
+            />
+          </View>
           <View style={styles.container}>
             <View style={{ alignItems: "center" }}>
               <AntDesign name="user" size={30} color="gray" />
