@@ -32,7 +32,7 @@ export default function HomeScreen() {
               <Text style={styles.text}>Location</Text>
               <CustomTextInput label="Pickup Location" hasBorder />
               <CustomTextInput label="Destination" hasBorder />
-              <CustomTextInput label="Distance" hasBorder />
+              <CustomTextInput label="Distance" hasBorder editable={false} />
             </View>
           </View>
           <View style={styles.container}>
@@ -53,14 +53,15 @@ export default function HomeScreen() {
               <CustomTextInput label="Image" hasBorder />
             </View>
           </View>
-
-          <CustomBtn
-            label="submit"
-            btnBorderRadius={10}
-            btnColor="#0000CD"
-            onPress={() => {}}
-          />
         </ScrollView>
+      </View>
+      <View>
+        <CustomBtn
+          label="submit"
+          btnBorderRadius={10}
+          btnColor="#0000CD"
+          onPress={() => {}}
+        />
       </View>
     </SafeAreaView>
   );

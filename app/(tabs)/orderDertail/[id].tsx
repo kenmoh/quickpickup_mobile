@@ -3,8 +3,6 @@ import {
   StyleSheet,
   ScrollView,
   View,
-  Dimensions,
-  TouchableOpacity,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AntDesign, Feather, MaterialCommunityIcons } from "@expo/vector-icons";
@@ -114,13 +112,8 @@ export default function HomeScreen() {
               <DetailLabel lable="Company Phone" value={"1800587944"} />
             </View>
           </View>
-          <TouchableOpacity
-            hitSlop={24}
-            onPress={() => console.log("Pressed")}
-            style={{ backgroundColor: "red" }}
-          ></TouchableOpacity>
-          <Text style={styles.text}>click</Text>
         </ScrollView>
+        
       </View>
     </SafeAreaView>
   );
