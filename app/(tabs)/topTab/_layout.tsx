@@ -1,11 +1,20 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { StyleSheet } from "react-native";
+import { withLayoutContext } from "expo-router";
+
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+
+const TopTabBar = withLayoutContext(createMaterialTopTabNavigator().Navigator);
 
 const TopTabLayout = () => {
   return (
-    <View>
-      <Text>TopTabLayout</Text>
-    </View>
+    <TopTabBar>
+      <TopTabBar.Screen name="index" options={{ title: "Orders" }} />
+      <TopTabBar.Screen name="myOrder" options={{ title: "My Orders" }} />
+      <TopTabBar.Screen
+        name="completedOrders"
+        options={{ title: "Delivered" }}
+      />
+    </TopTabBar>
   );
 };
 
