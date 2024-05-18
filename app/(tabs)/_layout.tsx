@@ -16,11 +16,11 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name="index"
+        name="topTab"
         options={{
           title: "Home",
           tabBarIcon: ({ color, size }) => (
-            <Entypo name="home" size={size} color={color} />
+            <Entypo name="add-to-list" size={size} color={color} />
           ),
         }}
       />
@@ -34,6 +34,17 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="orderDetail"
+        options={{
+          title: "Order Detail",
+          href: null,
+          tabBarIcon: ({ color, size }) => (
+            <Entypo name="add-to-list" size={size} color={color} />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
         name="profile"
         options={{
           title: "Profile",
@@ -43,13 +54,8 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="orderdetails"
-        options={{
-          title: "Order Details",
-          tabBarIcon: ({ color, size }) => (
-            <AntDesign name="user" size={size} color={color} />
-          ),
-        }}
+        name="[orderId]"
+        options={{ title: "order details with map", href: null }}
       />
     </Tabs>
   );

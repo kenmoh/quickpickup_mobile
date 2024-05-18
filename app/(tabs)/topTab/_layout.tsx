@@ -7,11 +7,22 @@ const TopTabBar = withLayoutContext(createMaterialTopTabNavigator().Navigator);
 
 const TopTabLayout = () => {
   return (
-    <TopTabBar>
+    <TopTabBar
+      screenOptions={{
+        tabBarAndroidRipple: { borderless: false },
+        tabBarPressColor: "red",
+        tabBarStyle: {
+          borderBottomColor: "yellow",
+          borderBottomWidth: StyleSheet.hairlineWidth,
+          elevation: 0,
+          shadowOpacity: 0,
+        },
+      }}
+    >
       <TopTabBar.Screen name="index" options={{ title: "Orders" }} />
       <TopTabBar.Screen name="myOrder" options={{ title: "My Orders" }} />
       <TopTabBar.Screen
-        name="completedOrders"
+        name="completedOrder"
         options={{ title: "Delivered" }}
       />
     </TopTabBar>

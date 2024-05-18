@@ -23,11 +23,7 @@ const OrderDetailLayout = () => {
     >
       <OrderDetailTopTab.Screen
         name="[id]"
-        options={{ title: "order details" }}
-      />
-      <OrderDetailTopTab.Screen
-        name="[id]"
-        options={{ title: "order details with map" }}
+        options={{ title: "order details", href: null }}
       />
     </OrderDetailTopTab>
   );

@@ -1,11 +1,17 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { Stack } from "expo-router";
 
 const OrderLayout = () => {
   return (
-    <View>
-      <Text>OrderLayout</Text>
-    </View>
+    <Stack
+      screenOptions={{
+        animation: "fade_from_bottom",
+        headerTitleAlign: "center",
+        headerShadowVisible: false,
+      }}
+    >
+      <Stack.Screen name="index" options={{ title: "List order" }} />
+    </Stack>
   );
 };
 
