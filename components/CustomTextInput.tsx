@@ -70,5 +70,9 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
 
-  text: { color: "gray", fontSize: 14, fontWeight: "bold" },
+  text: {
+    color: "gray",
+    fontSize: 14,
+    fontFamily: "Poppins-Bold",
+  },
 });

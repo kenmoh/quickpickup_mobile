@@ -5,8 +5,12 @@ const ProfileLayout = () => {
   return (
     <Stack>
       <Stack.Screen
-        name="index"
-        options={{ animation: "fade_from_bottom", title: "Profile" }}
+        name="profile"
+        options={{
+          animation: "fade_from_bottom",
+          title: "Profile",
+          headerShown: false,
+        }}
       />
     </Stack>
   );

@@ -12,17 +12,6 @@ export default function HomeScreen() {
     >
       <View style={styles.mainContainer}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          {/* <Text
-            style={{
-              marginVertical: 25,
-              textTransform: "uppercase",
-              fontSize: 16,
-              fontWeight: "bold",
-              color: "gray",
-            }}
-          >
-            Send Order
-          </Text> */}
           <View style={styles.container}>
             <View style={{ alignItems: "center" }}>
               <Entypo name="location-pin" size={30} color="gray" />
@@ -83,5 +72,6 @@ const styles = StyleSheet.create({
     color: "gray",
     marginVertical: 10,
     textTransform: "uppercase",
+    fontFamily: "Poppins-Regular",
   },
 });

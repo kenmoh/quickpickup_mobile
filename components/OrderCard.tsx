@@ -38,7 +38,7 @@ const OrderCard = ({ link }: { link: string }) => {
             <View
               style={{
                 flexDirection: "row",
-                alignItems: "center",
+                alignItems: "baseline",
                 marginTop: 5,
                 justifyContent: "space-between",
               }}

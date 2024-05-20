@@ -52,7 +52,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="order"
         options={{
-          title: "Order",
+          title: "New Order",
           tabBarIcon: ({ color, size }) => (
             <Entypo name="add-to-list" size={size} color={color} />
           ),

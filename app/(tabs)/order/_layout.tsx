@@ -11,7 +11,7 @@ const OrderLayout = () => {
         headerTransparent: true,
       }}
     >
-      <Stack.Screen name="index" options={{ title: "List order" }} />
+      <Stack.Screen name="index" options={{ title: "" }} />
     </Stack>
   );
 };
