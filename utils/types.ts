@@ -130,3 +130,8 @@ export type UpdateRider = {
   plateNumer: string
   photoUrl: string
 }
+
+export type Login = {
+    username: string,
+    password: string,
+}

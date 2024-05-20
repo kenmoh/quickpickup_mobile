@@ -41,3 +41,8 @@ export const dispatchValidationSchema = Yup.object().shape({
     .required()
     .label("Confirm Password"),
 });
+
+export const loginValidationSchema = Yup.object().shape({
+  username: Yup.string().email().trim().required().label("Email"),
+  password: Yup.string().required().label("Password"),
+});

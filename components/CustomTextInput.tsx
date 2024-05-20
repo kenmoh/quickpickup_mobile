@@ -65,9 +65,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     width: "100%",
     borderRadius: 5,
-    color: "gray",
+    color: "grey",
     marginVertical: 5,
     alignSelf: "center",
+    fontFamily: "Poppins-SemiBold",
   },
 
   text: {

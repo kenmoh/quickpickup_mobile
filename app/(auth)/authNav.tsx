@@ -8,33 +8,30 @@ const AuthNav = () => {
     <SafeAreaView style={styles.container}>
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Text style={styles.headerText}>Let's get you started</Text>
-        <View style={styles.btnContainer}>
-          <TouchableOpacity
-            style={[styles.btn, { elevation: 2 }]}
-            onPress={() => router.push("/signin")}
-          >
-            <Text style={styles.btntext}>Login</Text>
-          </TouchableOpacity>
 
-          <TouchableOpacity
-            style={[styles.btn, { backgroundColor: "black", elevation: 2 }]}
-            onPress={() => router.push("/signup")}
-          >
-            <Text style={[styles.btntext, { color: "white" }]}>
-              Sender Signup
-            </Text>
-          </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.btn, { borderColor: "blue", borderWidth: 2 }]}
+          onPress={() => router.push("/signin")}
+        >
+          <Text style={styles.btntext}>Login</Text>
+        </TouchableOpacity>
 
-          <TouchableOpacity
-            activeOpacity={0.8}
-            style={[styles.btn, { backgroundColor: "blue", elevation: 2 }]}
-            onPress={() => router.push("/signupDispatch")}
-          >
-            <Text style={[styles.btntext, { color: "white" }]}>
-              Rider Signup
-            </Text>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity
+          style={[styles.btn, { backgroundColor: "black", elevation: 2 }]}
+          onPress={() => router.push("/signup")}
+        >
+          <Text style={[styles.btntext, { color: "white" }]}>
+            Sender Signup
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          activeOpacity={0.8}
+          style={[styles.btn, { backgroundColor: "blue", elevation: 2 }]}
+          onPress={() => router.push("/signupDispatch")}
+        >
+          <Text style={[styles.btntext, { color: "white" }]}>Rider Signup</Text>
+        </TouchableOpacity>
       </View>
       <StatusBar style="inverted" />
     </SafeAreaView>
@@ -47,6 +44,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fff",
     flex: 1,
+    paddingHorizontal: 20,
   },
   btn: {
     width: "100%",
@@ -55,6 +53,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
+    marginBottom: 30,
   },
   btntext: {
     textTransform: "uppercase",
@@ -74,7 +73,7 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 18,
     alignSelf: "flex-start",
-    margin: 25,
+    // margin: 25,
     fontFamily: "Poppins-SemiBold",
   },
 });
