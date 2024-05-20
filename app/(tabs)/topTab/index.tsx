@@ -1,11 +1,15 @@
+import OrderCard from "@/components/OrderCard";
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const index = () => {
   return (
-    <View>
-      <Text>index</Text>
-    </View>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
+      <OrderCard />
+      <OrderCard />
+      <OrderCard />
+      <OrderCard />
+    </SafeAreaView>
   );
 };
 

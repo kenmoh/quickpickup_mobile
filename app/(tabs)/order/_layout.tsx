@@ -8,6 +8,7 @@ const OrderLayout = () => {
         animation: "fade_from_bottom",
         headerTitleAlign: "center",
         headerShadowVisible: false,
+        headerTransparent: true,
       }}
     >
       <Stack.Screen name="index" options={{ title: "List order" }} />

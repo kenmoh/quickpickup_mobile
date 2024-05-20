@@ -12,7 +12,7 @@ const TopTabLayout = () => {
         tabBarAndroidRipple: { borderless: false },
         tabBarPressColor: "red",
         tabBarStyle: {
-          borderBottomColor: "yellow",
+          borderBottomColor: "#eee",
           borderBottomWidth: StyleSheet.hairlineWidth,
           elevation: 0,
           shadowOpacity: 0,

@@ -12,7 +12,7 @@ export default function HomeScreen() {
     >
       <View style={styles.mainContainer}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <Text
+          {/* <Text
             style={{
               marginVertical: 25,
               textTransform: "uppercase",
@@ -22,7 +22,7 @@ export default function HomeScreen() {
             }}
           >
             Send Order
-          </Text>
+          </Text> */}
           <View style={styles.container}>
             <View style={{ alignItems: "center" }}>
               <Entypo name="location-pin" size={30} color="gray" />
