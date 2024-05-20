@@ -47,9 +47,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fff",
     flex: 1,
-    // borderTopEndRadius: 15,
-    // borderTopStartRadius: 15,
-    // paddingHorizontal: 15,
   },
   btn: {
     width: "100%",
@@ -63,6 +60,7 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
     fontSize: 15,
     fontWeight: "bold",
+    fontFamily: "Poppins-SemiBold",
   },
   btnContainer: {
     backgroundColor: "#eee",
@@ -77,5 +75,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     alignSelf: "flex-start",
     margin: 25,
+    fontFamily: "Poppins-SemiBold",
   },
 });

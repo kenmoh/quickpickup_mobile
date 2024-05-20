@@ -2,11 +2,12 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Image } from "expo-image";
 import { Link } from "expo-router";
 
-const OrderCard = () => {
-  const blurhash =
-    "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
+const blurhash =
+  "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
+
+const OrderCard = ({ link }: { link: string }) => {
   return (
-    <Link href={"/"} asChild>
+    <Link href={link} asChild>
       <TouchableOpacity>
         <View style={[styles.container]}>
           <View style={{ flex: 1 }}>
@@ -20,7 +21,15 @@ const OrderCard = () => {
           </View>
 
           <View style={{ flex: 4 }}>
-            <Text style={{ fontSize: 16, fontWeight: "600", marginBottom: 5 }}>
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: "600",
+                marginBottom: 5,
+                fontFamily: "Poppins-Bold",
+                letterSpacing: 1,
+              }}
+            >
               Order Name
             </Text>
             <Text style={styles.textStyle}>Origin: Abijo</Text>
@@ -35,8 +44,17 @@ const OrderCard = () => {
               }}
             >
               <View style={{ flexDirection: "row", alignItems: "baseline" }}>
-                <Text>Naira Sign here</Text>
-                <Text style={{ fontWeight: "bold", fontSize: 16 }}>4500</Text>
+                <Text>₦ </Text>
+                <Text
+                  style={{
+                    fontWeight: "bold",
+                    fontSize: 16,
+                    fontFamily: "Poppins-Regular",
+                    letterSpacing: 1,
+                  }}
+                >
+                  4500
+                </Text>
               </View>
               <Text style={styles.textStyle}>date here with dayjs</Text>
             </View>
@@ -66,10 +84,12 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     gap: 15,
-    backgroundColor: '"#fff"',
+    backgroundColor: "#fff",
   },
   textStyle: {
-    color: '"#aaa',
+    color: "#aaa",
+    fontFamily: "Poppins-Regular",
+    letterSpacing: 1,
   },
   image: {
     height: 65,

@@ -5,10 +5,10 @@ import { SafeAreaView } from "react-native-safe-area-context";
 const index = () => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
-      <OrderCard />
-      <OrderCard />
-      <OrderCard />
-      <OrderCard />
+      <OrderCard link="signin" />
+      <OrderCard link="signup" />
+      <OrderCard link="signupDispath" />
+      <OrderCard link="authNav" />
     </SafeAreaView>
   );
 };
