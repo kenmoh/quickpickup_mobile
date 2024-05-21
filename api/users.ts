@@ -40,10 +40,10 @@ const createDispatch = async(user: CreateDispatch) => {
   return result.data
 };
 
-const loginApi = async (user: Login) => {
+const loginApi = async (username: string, password: string) => {
   const data = new FormData();
-  data.append("username", user.username.trim());
-  data.append("password", user.password.trim());
+  data.append("username", username.trim());
+  data.append("password", password.trim());
 
   const result = await client.post("/login", data);
   if (!result.ok) throw new Error(result.status)

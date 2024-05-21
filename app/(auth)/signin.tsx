@@ -18,7 +18,8 @@ import InputErrorMessage from "@/components/InputErrorMessage";
 
 const SignUpDispatch = () => {
   const { error, isSuccess, mutate, isPending, data } = useMutation({
-    mutationFn: (user: Login) => usersApi.loginApi(user),
+    mutationFn: (user: Login) =>
+      usersApi.loginApi(user.username, user.password),
   });
 
   console.log(data);
@@ -48,6 +49,7 @@ const SignUpDispatch = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={{ backgroundColor: "#fff", flex: 1, alignItems: "center" }}>
+        <CustomActivityIndicator visible={isPending} />
         <View
           style={{
             flex: 1,
@@ -65,33 +67,34 @@ const SignUpDispatch = () => {
           >
             {({ handleChange, handleSubmit, values, errors, touched }) => (
               <>
-                <CustomActivityIndicator visible={isPending} />
-                <CustomTextInput
-                  label="Email"
-                  autoCapitalize="none"
-                  keyboardType="email-address"
-                  onChangeText={handleChange("username")}
-                  value={values.username}
-                />
-                {touched.username && errors.username && (
-                  <InputErrorMessage error={errors.username} />
-                )}
-                <CustomTextInput
-                  label="Password"
-                  autoCapitalize="none"
-                  secureTextEntry={true}
-                  onChangeText={handleChange("password")}
-                  value={values.password}
-                />
-                {touched.password && errors.password && (
-                  <InputErrorMessage error={errors.password} />
-                )}
-                <CustomBtn
-                  btnColor="#0000CD"
-                  label="Sign Up"
-                  btnBorderRadius={10}
-                  onPress={handleSubmit}
-                />
+                <View>
+                  <CustomTextInput
+                    label="Email"
+                    autoCapitalize="none"
+                    keyboardType="email-address"
+                    onChangeText={handleChange("username")}
+                    value={values.username}
+                  />
+                  {touched.username && errors.username && (
+                    <InputErrorMessage error={errors.username} />
+                  )}
+                  <CustomTextInput
+                    label="Password"
+                    autoCapitalize="none"
+                    secureTextEntry={true}
+                    onChangeText={handleChange("password")}
+                    value={values.password}
+                  />
+                  {touched.password && errors.password && (
+                    <InputErrorMessage error={errors.password} />
+                  )}
+                  <CustomBtn
+                    btnColor="#0000CD"
+                    label="Sign Up"
+                    btnBorderRadius={10}
+                    onPress={handleSubmit}
+                  />
+                </View>
               </>
             )}
           </Formik>
