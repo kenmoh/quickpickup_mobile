@@ -34,7 +34,7 @@ const createDispatch = async(user: CreateDispatch) => {
         phone_number: user.phoneNumber,
         password: user.password
   }
-
+  console.log(reqData)
   const result = await client.post(dispatchEndpoint, reqData);
   if (!result.ok) throw new Error(result.status)
   return result.data
@@ -45,6 +45,7 @@ const loginApi = async (username: string, password: string) => {
   data.append("username", username.trim());
   data.append("password", password.trim());
 
+  console.log(data)
   const result = await client.post("/login", data);
   if (!result.ok) throw new Error(result.status)
   return result.data

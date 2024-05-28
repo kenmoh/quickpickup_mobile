@@ -18,8 +18,8 @@ import InputErrorMessage from "@/components/InputErrorMessage";
 
 const SignUpDispatch = () => {
   const { error, isSuccess, mutate, isPending, data } = useMutation({
-    mutationFn: (user: Login) =>
-      usersApi.loginApi(user.username, user.password),
+    mutationFn: ({ username, password }: Login) =>
+      usersApi.loginApi(username, password),
   });
 
   console.log(data);
@@ -33,11 +33,12 @@ const SignUpDispatch = () => {
         alignItems: "center",
       },
     });
-    return;
+    router.replace("signin");
+    
   }
   if (isSuccess) {
     showMessage({
-      message: "Registration Successful.",
+      message: "Login Successful.",
       type: "success",
       style: {
         alignItems: "center",
