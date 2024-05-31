@@ -1,58 +1,131 @@
 import { Text, StyleSheet, ScrollView, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Entypo, Feather } from "@expo/vector-icons";
-import Divider from "@/components/Divider";
-import CustomTextInput from "@/components/CustomTextInput";
 import CustomBtn from "@/components/CustomBtn";
+import { Colors, themeMode } from "@/constants/Colors";
+import CustomTextInput from "@/components/CustomTextInput";
+import AppImagePicker from "@/components/AppImagePicker";
+import { Formik } from "formik";
+import { orderValidationSchema } from "@/utils/orderValidation";
+import ImagePickerForm from "@/components/ImageFormPicker";
+import InputErrorMessage from "@/components/InputErrorMessage";
+import { StatusBar } from "expo-status-bar";
 
 export default function HomeScreen() {
+  const theme: { mode: themeMode } = { mode: "dark" };
+  let activeColor = Colors[theme.mode];
   return (
-    <SafeAreaView
-      style={{ backgroundColor: "white", flex: 1, justifyContent: "center" }}
+    <View
+      style={{
+        backgroundColor: activeColor.background,
+        flex: 1,
+        justifyContent: "center",
+      }}
     >
+      <StatusBar style="inverted" />
       <View style={styles.mainContainer}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={styles.container}>
-            <View style={{ alignItems: "center" }}>
-              <Entypo name="location-pin" size={30} color="gray" />
-              <Divider />
-            </View>
-            <View style={{ flex: 1, paddingHorizontal: 5 }}>
-              <Text style={styles.text}>Location</Text>
-              <CustomTextInput label="Pickup Location" hasBorder />
-              <CustomTextInput label="Destination" hasBorder />
-              <CustomTextInput label="Distance" hasBorder editable={false} />
-            </View>
-          </View>
-          <View style={styles.container}>
-            <View style={{ alignItems: "center" }}>
-              <Feather name="box" size={30} color="gray" />
-              <Divider />
-            </View>
-            <View style={{ flex: 1, paddingHorizontal: 5 }}>
-              <Text style={styles.text}>Order Details</Text>
-              <CustomTextInput label="Name" hasBorder />
-              <CustomTextInput
-                label="Description"
-                hasBorder
-                multiline
-                numberOfLines={4}
-                textAlignVertical="top"
-              />
-              <CustomTextInput label="Image" hasBorder />
-            </View>
-          </View>
+          <Formik
+            initialValues={{
+              name: "",
+              description: "",
+              origin: "",
+              destination: "",
+              distance: "",
+              orderPhotoUrl: "",
+            }}
+            onSubmit={() => {}}
+            validationSchema={orderValidationSchema}
+          >
+            {({ handleChange, handleSubmit, values, errors, touched }) => (
+              <>
+                <View style={styles.container}>
+                  <View style={{ flex: 1, paddingHorizontal: 5 }}>
+                    <CustomTextInput
+                      onChangeText={handleChange("origin")}
+                      value={values.origin}
+                      labelColor={activeColor.text}
+                      label="Pickup Location"
+                      hasBorder={theme.mode !== "dark"}
+                      inputBackgroundColor={activeColor.inputBackground}
+                      inputTextColor={activeColor.text}
+                    />
+                    {touched.origin && errors.origin && (
+                      <InputErrorMessage error={errors.origin} />
+                    )}
+                    <CustomTextInput
+                      onChangeText={handleChange("destination")}
+                      value={values.destination}
+                      labelColor={activeColor.text}
+                      label="Destination"
+                      hasBorder={theme.mode !== "dark"}
+                      inputBackgroundColor={activeColor.inputBackground}
+                      inputTextColor={activeColor.text}
+                    />
+                    {touched.destination && errors.destination && (
+                      <InputErrorMessage error={errors.destination} />
+                    )}
+                    <CustomTextInput
+                      onChangeText={handleChange("distance")}
+                      value={values.distance}
+                      labelColor={activeColor.text}
+                      label="Distance"
+                      hasBorder={theme.mode !== "dark"}
+                      editable={false}
+                      inputBackgroundColor={activeColor.inputBackground}
+                      inputTextColor={activeColor.text}
+                    />
+                    {touched.distance && errors.distance && (
+                      <InputErrorMessage error={errors.distance} />
+                    )}
+                  </View>
+                </View>
+                <View style={styles.container}>
+                  <View style={{ flex: 1, paddingHorizontal: 5 }}>
+                    <CustomTextInput
+                      onChangeText={handleChange("name")}
+                      value={values.name}
+                      label="Name"
+                      hasBorder={theme.mode !== "dark"}
+                      inputBackgroundColor={activeColor.inputBackground}
+                      inputTextColor={activeColor.text}
+                      labelColor={activeColor.text}
+                    />
+                    {touched.name && errors.name && (
+                      <InputErrorMessage error={errors.name} />
+                    )}
+                    <CustomTextInput
+                      label="Description"
+                      onChangeText={handleChange("description")}
+                      value={values.desription}
+                      hasBorder={theme.mode !== "dark"}
+                      multiline
+                      numberOfLines={4}
+                      textAlignVertical="top"
+                      inputBackgroundColor={activeColor.inputBackground}
+                      inputTextColor={activeColor.text}
+                      labelColor={activeColor.text}
+                    />
+                    {touched.description && errors.description && (
+                      <InputErrorMessage error={errors.description} />
+                    )}
+                    <ImagePickerForm field={"orderPhotoUrl"} />
+
+                    <View style={styles.btnContainer}>
+                      <CustomBtn
+                        label="submit"
+                        btnBorderRadius={5}
+                        // btnColor="#0000CD"
+                        btnColor="orange"
+                        onPress={handleSubmit}
+                      />
+                    </View>
+                  </View>
+                </View>
+              </>
+            )}
+          </Formik>
         </ScrollView>
       </View>
-      <View>
-        <CustomBtn
-          label="submit"
-          btnBorderRadius={10}
-          btnColor="#0000CD"
-          onPress={() => {}}
-        />
-      </View>
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -73,5 +146,8 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     textTransform: "uppercase",
     fontFamily: "Poppins-Regular",
+  },
+  btnContainer: {
+    marginVertical: 20,
   },
 });

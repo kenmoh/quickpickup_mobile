@@ -2,17 +2,23 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Image } from "expo-image";
 import { Link } from "expo-router";
 
+import { Colors, themeMode } from "@/constants/Colors";
+import { EvilIcons, MaterialIcons } from "@expo/vector-icons";
+import { OrderType } from "@/utils/types";
+
 const blurhash =
   "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
 
-const OrderCard = ({ link }: { link: string }) => {
+const OrderCard = ({ order }: { order: OrderType }) => {
+  const theme: { mode: themeMode } = { mode: "dark" };
+  let activeColor = Colors[theme.mode];
   return (
-    <Link href={link} asChild>
+    <Link href={`orderDetail/${order?.id}`} asChild>
       <TouchableOpacity>
         <View style={[styles.container]}>
           <View style={{ flex: 1 }}>
             <Image
-              source="https://picsum.photos/seed/696/3000/2000"
+              source={order?.order_photo_url}
               placeholder={{ blurhash }}
               contentFit="cover"
               transition={1000}
@@ -27,14 +33,37 @@ const OrderCard = ({ link }: { link: string }) => {
                 fontWeight: "600",
                 marginBottom: 5,
                 fontFamily: "Poppins-Bold",
-                letterSpacing: 1,
+                letterSpacing: 1.2,
+                color: activeColor.text,
               }}
             >
-              Order Name
+              {order?.name}
             </Text>
-            <Text style={styles.textStyle}>Origin: Abijo</Text>
-            <Text style={styles.textStyle}>Destination: Lekki</Text>
-            <Text style={styles.textStyle}>Distance: 2 km</Text>
+            <View
+              style={{ flexDirection: "row", alignItems: "center", gap: 7.5 }}
+            >
+              <MaterialIcons
+                name="trip-origin"
+                size={20}
+                color={activeColor.icon}
+              />
+              <Text style={[styles.textStyle, { color: activeColor.text }]}>
+                {order?.origin}
+              </Text>
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                gap: 7.5,
+              }}
+            >
+              <EvilIcons name="location" size={20} color={activeColor.icon} />
+              <Text style={[styles.textStyle, { color: activeColor.text }]}>
+                {order?.destination}
+              </Text>
+            </View>
+
             <View
               style={{
                 flexDirection: "row",
@@ -44,26 +73,34 @@ const OrderCard = ({ link }: { link: string }) => {
               }}
             >
               <View style={{ flexDirection: "row", alignItems: "baseline" }}>
-                <Text>₦ </Text>
+                <Text style={{ color: activeColor.text }}> ₦ </Text>
                 <Text
                   style={{
                     fontWeight: "bold",
                     fontSize: 16,
                     fontFamily: "Poppins-Regular",
-                    letterSpacing: 1,
+                    letterSpacing: 1.4,
+                    color: activeColor.text,
                   }}
                 >
-                  4500
+                  {order?.total_cost}
                 </Text>
               </View>
-              <Text style={styles.textStyle}>date here with dayjs</Text>
+              <Text
+                style={[
+                  styles.textStyle,
+                  { color: activeColor.tabIconDefault },
+                ]}
+              >
+                28-05-2024
+              </Text>
             </View>
           </View>
         </View>
         <View
           style={{
             borderWidth: StyleSheet.hairlineWidth,
-            borderColor: "#eee",
+            borderColor: activeColor.borderolor,
             marginVertical: 10,
           }}
         />
@@ -82,12 +119,8 @@ const styles = StyleSheet.create({
     gap: 20,
     marginVertical: 5,
   },
-  wrapper: {
-    gap: 15,
-    backgroundColor: "#fff",
-  },
+
   textStyle: {
-    color: "#aaa",
     fontFamily: "Poppins-Regular",
     letterSpacing: 1,
   },

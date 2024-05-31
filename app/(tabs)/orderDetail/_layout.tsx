@@ -1,4 +1,4 @@
-import { withLayoutContext } from "expo-router";
+import { Stack, withLayoutContext } from "expo-router";
 
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { StyleSheet } from "react-native";
@@ -9,23 +9,24 @@ const OrderDetailTopTab = withLayoutContext(
 
 const OrderDetailLayout = () => {
   return (
-    <OrderDetailTopTab
+    <Stack
       screenOptions={{
-        tabBarAndroidRipple: { borderless: false },
-        tabBarPressColor: "white",
-        tabBarStyle: {
-          borderBottomWidth: StyleSheet.hairlineWidth,
-          borderBlockColor: "red",
-          elevation: 0,
-          shadowOpacity: 0,
-        },
+        // tabBarAndroidRipple: { borderless: false },
+        // tabBarPressColor: "white",
+        // tabBarStyle: {
+        //   borderBottomWidth: StyleSheet.hairlineWidth,
+        //   borderBlockColor: "red",
+        //   elevation: 0,
+        //   shadowOpacity: 0,
+        // },
+        headerShown: false,
       }}
     >
-      <OrderDetailTopTab.Screen
+      <Stack.Screen
         name="[id]"
-        options={{ title: "order details", href: null }}
+        // options={{ title: "order details", headerTransparent: true }}
       />
-    </OrderDetailTopTab>
+    </Stack>
   );
 };
 

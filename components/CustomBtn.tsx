@@ -11,7 +11,7 @@ type CustomBtnProps = {
   btnColor: string;
   label: string;
   btnHeight?: number;
-  btnWidth?: number;
+  // btnWidth?: number;
   onPress: () => void;
 };
 
@@ -22,7 +22,7 @@ const CustomBtn = ({
   btnColor,
   label,
   btnHeight = 45,
-  btnWidth = width * (90 / 100),
+  // btnWidth = width * (90 / 100),
   onPress = () => {},
   ...props
 }: CustomBtnProps) => {
@@ -35,7 +35,7 @@ const CustomBtn = ({
         {
           borderRadius: btnBorderRadius,
           backgroundColor: btnColor,
-          width: btnWidth,
+          // width: btnWidth,
           height: btnHeight,
         },
         { ...props },
@@ -53,7 +53,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "center",
-    marginVertical: 20,
+    // marginVertical: 20,
+    width: "100%",
   },
   text: {
     textTransform: "uppercase",

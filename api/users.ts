@@ -18,7 +18,7 @@ const createUser = async(user: CreateUser) => {
   }
 
   const result = await client.post(userEndpoint, reqData);
-  if (!result.ok) throw new Error(result.status)
+  if (!result.ok) throw new Error(result.data.detail)
   return result.data
 };
 
@@ -34,20 +34,22 @@ const createDispatch = async(user: CreateDispatch) => {
         phone_number: user.phoneNumber,
         password: user.password
   }
-  console.log(reqData)
+  
   const result = await client.post(dispatchEndpoint, reqData);
-  if (!result.ok) throw new Error(result.status)
+ 
+  if (!result.ok) throw new Error(result.data.detail)
   return result.data
 };
 
-const loginApi = async (username: string, password: string) => {
+const loginApi = async (user: Login) => {
   const data = new FormData();
-  data.append("username", username.trim());
-  data.append("password", password.trim());
-
-  console.log(data)
+  data.append("username", user.username.trim());
+  data.append("password", user.password.trim());
+ 
+  
   const result = await client.post("/login", data);
-  if (!result.ok) throw new Error(result.status)
+  console.log(result.data)
+  if (!result.ok) throw new Error(result.data.detail)
   return result.data
 };
  

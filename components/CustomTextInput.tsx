@@ -15,10 +15,14 @@ type InputProps = {
   inputBorderColor?: string;
   inputBackgroundColor?: string;
   hasBorder?: boolean;
+  labelColor?: string;
+  inputTextColor: string;
 };
 
 const CustomTextInput = ({
   label,
+  labelColor,
+  inputTextColor,
   placeholder,
   secureTextEntry,
   keyboardType,
@@ -30,7 +34,7 @@ const CustomTextInput = ({
 }: InputProps) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{label}</Text>
+      <Text style={[styles.text, { color: labelColor }]}>{label}</Text>
       <TextInput
         style={[
           styles.textInput,
@@ -38,9 +42,11 @@ const CustomTextInput = ({
             backgroundColor: inputBackgroundColor,
             borderWidth: inputBorderWidth,
             borderColor: inputBorderColor,
+            color: inputTextColor,
           },
         ]}
         placeholder={placeholder}
+        placeholderTextColor={"#aaa"}
         secureTextEntry={secureTextEntry}
         keyboardType={keyboardType}
         autoComplete="off"
@@ -65,14 +71,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     width: "100%",
     borderRadius: 5,
-    color: "grey",
     marginVertical: 5,
     alignSelf: "center",
     fontFamily: "Poppins-SemiBold",
   },
 
   text: {
-    color: "gray",
     fontSize: 14,
     fontFamily: "Poppins-Bold",
   },

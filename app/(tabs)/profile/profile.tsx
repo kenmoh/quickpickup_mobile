@@ -3,9 +3,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 const index = () => {
   return (
-    <SafeAreaView style={{ backgroundColor: "white", flex: 1 }}>
+    <View style={{ backgroundColor: "white", flex: 1 }}>
       <Text>profile</Text>
-    </SafeAreaView>
+    </View>
   );
 };
 

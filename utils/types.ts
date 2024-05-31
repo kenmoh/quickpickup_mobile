@@ -5,7 +5,7 @@ type PaymentStatus = 'paid' | 'pending' | 'cancelled' | 'failed'
 type AccountStatus = 'pending' | 'confirmed'
 
 export type OrderType = {
-    id: string
+    id?: string
     name?: string
     origin?: string
     destination?: string
@@ -19,7 +19,7 @@ export type OrderType = {
     rider_name?: string
     rider_phone_number?: string
     total_cost: number
-    amount_payble: number
+    amount_payable: number
     order_photo_url: string
     order_status?: OrderStatus
     deduction: number

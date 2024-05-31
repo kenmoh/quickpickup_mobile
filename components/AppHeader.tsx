@@ -2,6 +2,7 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import CustomTextInput from "@/components/CustomTextInput";
 import { Link } from "expo-router";
 import { AntDesign } from "@expo/vector-icons";
+import { Colors, themeMode } from "@/constants/Colors";
 
 const HeaderLeft = ({ link, iconName }: { link: string; iconName: any }) => {
   return (
@@ -21,10 +22,21 @@ const HeaderLeft = ({ link, iconName }: { link: string; iconName: any }) => {
 };
 
 const AppHeader = () => {
+  const theme: { mode: themeMode } = { mode: "dark" };
+  let activeColor = Colors[theme.mode];
   return (
     <View style={styles.container}>
       <HeaderLeft link="/" iconName={"home"} />
-      <CustomTextInput placeholder="Search" style={styles.textIput} />
+      <CustomTextInput
+        placeholder="Search"
+        style={[
+          styles.textIput,
+          {
+            backgroundColor: activeColor.inputBackground,
+            color: activeColor.text,
+          },
+        ]}
+      />
       <HeaderLeft link="/" iconName={"bells"} />
     </View>
   );
@@ -44,7 +56,6 @@ const styles = StyleSheet.create({
     width: 250,
     paddingHorizontal: 15,
     paddingVertical: 5,
-    backgroundColor: "#eee",
     borderRadius: 50,
     marginBottom: 10,
   },

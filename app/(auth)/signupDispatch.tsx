@@ -15,15 +15,18 @@ import usersApi from "@/api/users";
 import { CreateDispatch } from "@/utils/types";
 import { router } from "expo-router";
 import { Formik } from "formik";
+import { Colors, themeMode } from "@/constants/Colors";
 
 const SignUpDispatch = () => {
+  const theme: { mode: themeMode } = { mode: "dark" };
+  let activeColor = Colors[theme.mode];
   const { error, isSuccess, mutate, isPending } = useMutation({
     mutationFn: (user: CreateDispatch) => usersApi.createDispatch(user),
   });
-
-  if (error?.message == "409") {
+  console.log(error?.message);
+  if (error) {
     showMessage({
-      message: "Field already exists",
+      message: error.message,
       type: "danger",
       style: {
         alignItems: "center",
@@ -44,7 +47,13 @@ const SignUpDispatch = () => {
   }
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View style={{ backgroundColor: "#fff", flex: 1, alignItems: "center" }}>
+      <View
+        style={{
+          backgroundColor: activeColor.background,
+          flex: 1,
+          alignItems: "center",
+        }}
+      >
         <ScrollView
           showsVerticalScrollIndicator={false}
           style={{
@@ -52,10 +61,10 @@ const SignUpDispatch = () => {
             width: "100%",
             borderRadius: 10,
             padding: 20,
-            backgroundColor: "#fff",
+            backgroundColor: activeColor.background,
           }}
         >
-          <TitleText label="Signup | Rider" />
+          <TitleText label="Signup | Rider" textColor={activeColor.text} />
           <Formik
             initialValues={{
               companyName: "",
@@ -76,6 +85,9 @@ const SignUpDispatch = () => {
                   autoCapitalize="none"
                   keyboardType="email-address"
                   onChangeText={handleChange("email")}
+                  labelColor={activeColor.text}
+                  inputBackgroundColor={activeColor.inputBackground}
+                  inputTextColor={activeColor.text}
                   value={values.email}
                 />
                 {touched.email && errors.email && (
@@ -85,6 +97,9 @@ const SignUpDispatch = () => {
                   label="Phone Number"
                   keyboardType="phone-pad"
                   onChangeText={handleChange("phoneNumber")}
+                  labelColor={activeColor.text}
+                  inputBackgroundColor={activeColor.inputBackground}
+                  inputTextColor={activeColor.text}
                   value={values.phoneNumber}
                 />
                 {touched.phoneNumber && errors.phoneNumber && (
@@ -93,6 +108,9 @@ const SignUpDispatch = () => {
                 <CustomTextInput
                   label="Company Name"
                   onChangeText={handleChange("companyName")}
+                  labelColor={activeColor.text}
+                  inputBackgroundColor={activeColor.inputBackground}
+                  inputTextColor={activeColor.text}
                   value={values.companyName}
                 />
                 {touched.companyName && errors.companyName && (
@@ -101,6 +119,9 @@ const SignUpDispatch = () => {
                 <CustomTextInput
                   label="Company Reg No."
                   onChangeText={handleChange("companyRegNum")}
+                  labelColor={activeColor.text}
+                  inputBackgroundColor={activeColor.inputBackground}
+                  inputTextColor={activeColor.text}
                   value={values.companyRegNum}
                 />
                 {touched.companyRegNum && errors.companyRegNum && (
@@ -111,6 +132,9 @@ const SignUpDispatch = () => {
                   autoCapitalize="none"
                   secureTextEntry={true}
                   onChangeText={handleChange("password")}
+                  labelColor={activeColor.text}
+                  inputBackgroundColor={activeColor.inputBackground}
+                  inputTextColor={activeColor.text}
                   value={values.password}
                 />
                 {touched.password && errors.password && (
@@ -121,6 +145,9 @@ const SignUpDispatch = () => {
                   secureTextEntry={true}
                   onChangeText={handleChange("confirmPassword")}
                   value={values.confirmPassword}
+                  labelColor={activeColor.text}
+                  inputBackgroundColor={activeColor.inputBackground}
+                  inputTextColor={activeColor.text}
                 />
                 {touched.confirmPassword && errors.confirmPassword && (
                   <InputErrorMessage error={errors.confirmPassword} />
@@ -142,7 +169,7 @@ const SignUpDispatch = () => {
           />
         </ScrollView>
       </View>
-      <StatusBar style="dark" />
+      <StatusBar style="light" backgroundColor={activeColor.background} />
     </SafeAreaView>
   );
 };

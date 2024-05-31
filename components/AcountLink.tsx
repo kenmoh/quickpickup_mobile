@@ -17,7 +17,7 @@ const AccountLinkText = ({
   isLoginSreen: boolean;
 }) => {
   return (
-    <View>
+    <View style={{ flex: 1, marginBottom: 40 }}>
       <Text style={styles.text}>
         {question}
         <Link href={senderLink}>
@@ -40,7 +40,7 @@ export default AccountLinkText;
 
 const styles = StyleSheet.create({
   linkText: {
-    color: "#0000CD",
+    color: "#004e98",
     fontWeight: "bold",
   },
   text: {

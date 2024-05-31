@@ -1,7 +1,7 @@
 import { Link, Tabs } from "expo-router";
 import { Entypo, AntDesign } from "@expo/vector-icons";
 
-import { Colors } from "@/constants/Colors";
+import { Colors, themeMode } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { Pressable, StyleSheet } from "react-native";
 import AppHeader from "@/components/AppHeader";
@@ -25,17 +25,23 @@ const HeaderLeft = ({ link, iconName }: { link: string; iconName: any }) => {
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const theme: { mode: themeMode } = { mode: "dark" };
+  let activeColor = Colors[theme.mode];
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+        tabBarActiveTintColor: activeColor.text,
         headerTitleAlign: "center",
+        headerTintColor: activeColor.text,
+        tabBarStyle: {
+          backgroundColor: activeColor.background,
+        },
         headerStyle: {
-          borderBottomWidth: StyleSheet.hairlineWidth,
-          borderBottomColor: "#eee",
+          borderBottomColor: "#aaa",
           elevation: 0,
           shadowOpacity: 0,
+          backgroundColor: activeColor.background,
         },
       }}
     >
@@ -61,11 +67,12 @@ export default function TabLayout() {
       <Tabs.Screen
         name="orderDetail"
         options={{
-          title: "Order Detail",
+          title: "",
           href: null,
           tabBarIcon: ({ color, size }) => (
             <Entypo name="add-to-list" size={size} color={color} />
           ),
+          headerTransparent: true,
         }}
       />
 

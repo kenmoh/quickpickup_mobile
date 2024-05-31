@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -8,6 +9,7 @@ import CustomBtn from "@/components/CustomBtn";
 import CustomTextInput from "@/components/CustomTextInput";
 import TitleText from "@/components/TitleText";
 import usersApi from "@/api/users";
+import authApi from "@/api/auth";
 import { Login } from "@/utils/types";
 import { showMessage } from "react-native-flash-message";
 import { router } from "expo-router";
@@ -15,26 +17,55 @@ import { Formik } from "formik";
 import CustomActivityIndicator from "@/components/CustomActivityIndicator";
 import { loginValidationSchema } from "@/utils/validations";
 import InputErrorMessage from "@/components/InputErrorMessage";
+import { Colors, themeMode } from "@/constants/Colors";
 
-const SignUpDispatch = () => {
+const Sign = () => {
+  const theme: { mode: themeMode } = { mode: "dark" };
+  let activeColor = Colors[theme.mode];
+
+  // const [isLoading, setIsLoading] = useState(false);
+
+  // const handleSignIn = async ({
+  //   username,
+  //   password,
+  // }: {
+  //   username: string;
+  //   password: string;
+  // }) => {
+  //   setIsLoading(true);
+
+  //   const result = await usersApi.loginApi(username, password);
+
+  //   setIsLoading(false);
+  //   if (!result.ok) {
+  //     showMessage({
+  //       message: result.data.detail[0].msg,
+  //       type: "danger",
+  //       style: {
+  //         alignItems: "center",
+  //       },
+  //     });
+
+  //     return;
+  //   }
+  // };
+
   const { error, isSuccess, mutate, isPending, data } = useMutation({
-    mutationFn: ({ username, password }: Login) =>
-      usersApi.loginApi(username, password),
+    mutationFn: (user: Login) => usersApi.loginApi(user),
   });
 
   console.log(data);
-  console.log(error);
 
   if (error) {
     showMessage({
-      message: "Invalid credentials",
+      message: error.message,
       type: "danger",
       style: {
         alignItems: "center",
       },
     });
     router.replace("signin");
-    
+    return;
   }
   if (isSuccess) {
     showMessage({
@@ -45,11 +76,18 @@ const SignUpDispatch = () => {
       },
     });
     router.replace("(tabs)");
+    return;
   }
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View style={{ backgroundColor: "#fff", flex: 1, alignItems: "center" }}>
+      <View
+        style={{
+          backgroundColor: activeColor.background,
+          flex: 1,
+          alignItems: "center",
+        }}
+      >
         <CustomActivityIndicator visible={isPending} />
         <View
           style={{
@@ -57,10 +95,10 @@ const SignUpDispatch = () => {
             width: "100%",
             borderRadius: 10,
             padding: 20,
-            backgroundColor: "#fff",
+            backgroundColor: activeColor.background,
           }}
         >
-          <TitleText label="Sign In" />
+          <TitleText label="Sign In" textColor={activeColor.text} />
           <Formik
             initialValues={{ username: "", password: "" }}
             validationSchema={loginValidationSchema}
@@ -75,6 +113,9 @@ const SignUpDispatch = () => {
                     keyboardType="email-address"
                     onChangeText={handleChange("username")}
                     value={values.username}
+                    labelColor={activeColor.text}
+                    inputBackgroundColor={activeColor.inputBackground}
+                    inputTextColor={activeColor.text}
                   />
                   {touched.username && errors.username && (
                     <InputErrorMessage error={errors.username} />
@@ -85,12 +126,15 @@ const SignUpDispatch = () => {
                     secureTextEntry={true}
                     onChangeText={handleChange("password")}
                     value={values.password}
+                    labelColor={activeColor.text}
+                    inputBackgroundColor={activeColor.inputBackground}
+                    inputTextColor={activeColor.text}
                   />
                   {touched.password && errors.password && (
                     <InputErrorMessage error={errors.password} />
                   )}
                   <CustomBtn
-                    btnColor="#0000CD"
+                    btnColor={Colors.primaryBtnColor}
                     label="Sign Up"
                     btnBorderRadius={10}
                     onPress={handleSubmit}
@@ -110,11 +154,11 @@ const SignUpDispatch = () => {
           />
         </View>
       </View>
-      <StatusBar style="dark" />
+      <StatusBar style="light" backgroundColor={activeColor.background} />
     </SafeAreaView>
   );
 };
 
-export default SignUpDispatch;
+export default Sign;
 
 const styles = StyleSheet.create({});
