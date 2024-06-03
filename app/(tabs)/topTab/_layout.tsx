@@ -1,13 +1,15 @@
+import { useContext } from "react";
 import { StyleSheet } from "react-native";
 import { withLayoutContext } from "expo-router";
 
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { Colors, themeMode } from "@/constants/Colors";
+import { ThemeContext } from "@/context/themeContext";
 
 const TopTabBar = withLayoutContext(createMaterialTopTabNavigator().Navigator);
 
 const TopTabLayout = () => {
-  const theme: { mode: themeMode } = { mode: "dark" };
+  const { theme } = useContext(ThemeContext);
   let activeColor = Colors[theme.mode];
   return (
     <TopTabBar

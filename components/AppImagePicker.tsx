@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   StyleSheet,
   View,
@@ -10,6 +10,7 @@ import * as ImagePicker from "expo-image-picker";
 
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { Colors, themeMode } from "@/constants/Colors";
+import { ThemeContext } from "@/context/themeContext";
 
 const AppImagePicker = ({
   imageUri,
@@ -18,7 +19,7 @@ const AppImagePicker = ({
   imageUri: string;
   onChangeImage: (url: string | null) => null | string;
 }) => {
-  const theme: { mode: themeMode } = { mode: "dark" };
+  const { theme } = useContext(ThemeContext);
   let activeColor = Colors[theme.mode];
 
   const handlePress = () => {

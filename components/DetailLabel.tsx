@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import { Colors, themeMode } from "@/constants/Colors";
+import { ThemeContext } from "@/context/themeContext";
 
 const DetailLabel = ({
   lable,
@@ -9,7 +10,7 @@ const DetailLabel = ({
   lable: string;
   value: string | number;
 }) => {
-  const theme: { mode: themeMode } = { mode: "dark" };
+  const { theme } = useContext(ThemeContext);
   let activeColor = Colors[theme.mode];
   return (
     <>

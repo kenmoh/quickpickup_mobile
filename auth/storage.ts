@@ -1,8 +1,6 @@
+import { ThemeModeType } from "@/context/themeContext";
 import * as SecureStore from "expo-secure-store";
 import jwtDecode from "jwt-decode";
-
-// TODO Delete log before build
-
 
 
 const key = "authToken";
@@ -36,6 +34,32 @@ const removeToken = async () => {
     throw error
   }
 };
+
+export const storeTheme = async (key: string, value: ThemeModeType) => {
+  try {
+    
+    await SecureStore.setItemAsync(key, JSON.stringify(value))
+    console.log(`Stored theme mode: ${value}`);
+  } catch (error) {
+    throw  error
+  }
+}
+export const getTheme = async (key: string) => {
+  try {
+    const jsonValue = await SecureStore.getItemAsync(key);
+    if (jsonValue != null) {
+      const parsedValue = JSON.parse(jsonValue);
+      console.log(`Retrieved theme mode: ${parsedValue}`);
+      return parsedValue;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    throw error;
+  }
+}
+
+
 
 export default {
   getToken,

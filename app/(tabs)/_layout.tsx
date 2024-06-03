@@ -1,10 +1,11 @@
 import { Link, Tabs } from "expo-router";
 import { Entypo, AntDesign } from "@expo/vector-icons";
 
-import { Colors, themeMode } from "@/constants/Colors";
-import { useColorScheme } from "@/hooks/useColorScheme";
-import { Pressable, StyleSheet } from "react-native";
+import { Colors } from "@/constants/Colors";
+import { Pressable } from "react-native";
 import AppHeader from "@/components/AppHeader";
+import { useContext } from "react";
+import { ThemeContext } from "@/context/themeContext";
 
 const HeaderLeft = ({ link, iconName }: { link: string; iconName: any }) => {
   return (
@@ -24,8 +25,7 @@ const HeaderLeft = ({ link, iconName }: { link: string; iconName: any }) => {
 };
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-  const theme: { mode: themeMode } = { mode: "dark" };
+  const { theme } = useContext(ThemeContext);
   let activeColor = Colors[theme.mode];
 
   return (
@@ -64,22 +64,7 @@ export default function TabLayout() {
           ),
         }}
       />
-      <Tabs.Screen
-        name="orderDetail"
-        options={{
-          title: "",
-          href: null,
-          tabBarIcon: ({ color, size }) => (
-            <Entypo name="add-to-list" size={size} color={color} />
-          ),
-          headerTransparent: true,
-        }}
-      />
 
-      <Tabs.Screen
-        name="[orderId]"
-        options={{ title: "order details with map", href: null }}
-      />
       <Tabs.Screen
         name="wallet"
         options={{

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -18,11 +18,11 @@ import CustomActivityIndicator from "@/components/CustomActivityIndicator";
 import { loginValidationSchema } from "@/utils/validations";
 import InputErrorMessage from "@/components/InputErrorMessage";
 import { Colors, themeMode } from "@/constants/Colors";
+import { ThemeContext } from "@/context/themeContext";
 
 const Sign = () => {
-  const theme: { mode: themeMode } = { mode: "dark" };
+  const { theme } = useContext(ThemeContext);
   let activeColor = Colors[theme.mode];
-
   // const [isLoading, setIsLoading] = useState(false);
 
   // const handleSignIn = async ({
@@ -109,6 +109,7 @@ const Sign = () => {
                 <View>
                   <CustomTextInput
                     label="Email"
+                    hasBorder={theme.mode !== "dark"}
                     autoCapitalize="none"
                     keyboardType="email-address"
                     onChangeText={handleChange("username")}
@@ -122,6 +123,7 @@ const Sign = () => {
                   )}
                   <CustomTextInput
                     label="Password"
+                    hasBorder={theme.mode !== "dark"}
                     autoCapitalize="none"
                     secureTextEntry={true}
                     onChangeText={handleChange("password")}
@@ -133,12 +135,14 @@ const Sign = () => {
                   {touched.password && errors.password && (
                     <InputErrorMessage error={errors.password} />
                   )}
-                  <CustomBtn
-                    btnColor={Colors.primaryBtnColor}
-                    label="Sign Up"
-                    btnBorderRadius={10}
-                    onPress={handleSubmit}
-                  />
+                  <View style={{ marginVertical: 25 }}>
+                    <CustomBtn
+                      btnColor={Colors.btnPrimaryColor}
+                      label="Sign Up"
+                      btnBorderRadius={10}
+                      onPress={handleSubmit}
+                    />
+                  </View>
                 </View>
               </>
             )}

@@ -1,4 +1,7 @@
+import { Colors } from "@/constants/Colors";
+import { ThemeContext } from "@/context/themeContext";
 import { Link } from "expo-router";
+import { useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 const AccountLinkText = ({
@@ -16,18 +19,21 @@ const AccountLinkText = ({
   riderLabel?: string;
   isLoginSreen: boolean;
 }) => {
+  const { theme } = useContext(ThemeContext);
+  let activeColor = Colors[theme.mode];
   return (
     <View style={{ flex: 1, marginBottom: 40 }}>
-      <Text style={styles.text}>
+      <Text style={[styles.text, { color: activeColor.text }]}>
         {question}
-        <Link href={senderLink}>
-          <Text style={styles.linkText}>{senderLabel}</Text>
+        <Link href={senderLink} style={styles.linkText}>
+          {senderLabel}
         </Link>
         {isLoginSreen && (
           <>
-            <Text> or </Text>
-            <Link href={riderLink!}>
-              <Text style={styles.linkText}> {riderLabel}</Text>
+            {" "}
+            or{" "}
+            <Link href={riderLink!} style={styles.linkText}>
+              {riderLabel}
             </Link>
           </>
         )}
@@ -45,7 +51,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 16,
-    color: "grey",
     textAlign: "center",
+    fontWeight: "600",
   },
 });

@@ -1,10 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import { Colors, themeMode } from "@/constants/Colors";
 import OrderCard from "@/components/OrderCard";
+import { ThemeContext } from "@/context/themeContext";
 
 const myOrder = () => {
-  const theme: { mode: themeMode } = { mode: "dark" };
+  const { theme } = useContext(ThemeContext);
   let activeColor = Colors[theme.mode];
   return (
     <View

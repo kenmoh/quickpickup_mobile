@@ -3,6 +3,8 @@ import CustomTextInput from "@/components/CustomTextInput";
 import { Link } from "expo-router";
 import { AntDesign } from "@expo/vector-icons";
 import { Colors, themeMode } from "@/constants/Colors";
+import { useContext } from "react";
+import { ThemeContext } from "@/context/themeContext";
 
 const HeaderLeft = ({ link, iconName }: { link: string; iconName: any }) => {
   return (
@@ -22,7 +24,7 @@ const HeaderLeft = ({ link, iconName }: { link: string; iconName: any }) => {
 };
 
 const AppHeader = () => {
-  const theme: { mode: themeMode } = { mode: "dark" };
+  const { theme } = useContext(ThemeContext);
   let activeColor = Colors[theme.mode];
   return (
     <View style={styles.container}>

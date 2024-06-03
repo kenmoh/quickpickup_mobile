@@ -1,8 +1,10 @@
 import { Colors, themeMode } from "@/constants/Colors";
+import { ThemeContext } from "@/context/themeContext";
+import { useContext } from "react";
 import { StyleSheet, View, Platform, ActivityIndicator } from "react-native";
 
 const CustomActivityIndicator = ({ visible }: { visible: boolean }) => {
-  const theme: { mode: themeMode } = { mode: "dark" };
+  const { theme } = useContext(ThemeContext);
   let activeColor = Colors[theme.mode];
   if (!visible) return null;
   return (

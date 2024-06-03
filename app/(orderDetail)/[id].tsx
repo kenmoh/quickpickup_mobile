@@ -6,11 +6,17 @@ import {
   ActivityIndicator,
   Platform,
   Dimensions,
+  TouchableOpacity,
 } from "react-native";
 import { useQuery } from "@tanstack/react-query";
-import { AntDesign, Feather, MaterialCommunityIcons } from "@expo/vector-icons";
+import {
+  AntDesign,
+  Feather,
+  Ionicons,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 import { Image } from "expo-image";
-import { useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import Divider from "@/components/Divider";
 import DetailLabel from "@/components/DetailLabel";
@@ -19,10 +25,8 @@ import { Colors, themeMode } from "@/constants/Colors";
 import ordersApi from "@/api/orders";
 import { OrderType } from "@/utils/types";
 import CustomBtn from "@/components/CustomBtn";
-
-type OrderDetailResponseType = {
-  data: OrderType;
-};
+import { useContext } from "react";
+import { ThemeContext } from "@/context/themeContext";
 
 const IMG_HEIGHT = 300;
 const { width } = Dimensions.get("window");
@@ -30,7 +34,7 @@ const { width } = Dimensions.get("window");
 export default function HomeScreen() {
   const { id } = useLocalSearchParams();
 
-  const theme: { mode: themeMode } = { mode: "dark" };
+  const { theme } = useContext(ThemeContext);
   let activeColor = Colors[theme.mode];
 
   const { data, error, isFetching } = useQuery({
@@ -98,16 +102,6 @@ export default function HomeScreen() {
                 justifyContent: "space-between",
               }}
             >
-              <Text
-                style={{
-                  textTransform: "uppercase",
-                  fontSize: 16,
-                  fontWeight: "bold",
-                  color: activeColor.text,
-                }}
-              >
-                Status:
-              </Text>
               <Status
                 text={order?.order_status!}
                 backgroundColor={
@@ -132,6 +126,41 @@ export default function HomeScreen() {
                     : "#e8ac65"
                 }
               />
+              <TouchableOpacity
+                hitSlop={25}
+                onPress={() =>
+                  router.push({
+                    pathname: "/orderMap",
+                    params: {
+                      id,
+                      distance: order?.distance,
+                      cost: order?.total_cost,
+                      origin: order?.origin,
+                      destination: order?.destination,
+                    },
+                  })
+                }
+                style={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flexDirection: "row",
+                  gap: 10,
+                  borderWidth: 1.5,
+                  borderColor: activeColor.tabIconDefault,
+                  borderRadius: 20,
+                  paddingVertical: 5,
+                  paddingHorizontal: 15,
+                }}
+              >
+                <Ionicons
+                  name="map-outline"
+                  size={24}
+                  color={activeColor.tabIconDefault}
+                />
+                <Text style={{ color: activeColor.tabIconDefault }}>
+                  View on map
+                </Text>
+              </TouchableOpacity>
             </View>
           </View>
           <View style={styles.container}>

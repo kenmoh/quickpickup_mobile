@@ -5,15 +5,17 @@ import { Link } from "expo-router";
 import { Colors, themeMode } from "@/constants/Colors";
 import { EvilIcons, MaterialIcons } from "@expo/vector-icons";
 import { OrderType } from "@/utils/types";
+import { useContext } from "react";
+import { ThemeContext } from "@/context/themeContext";
 
 const blurhash =
   "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
 
 const OrderCard = ({ order }: { order: OrderType }) => {
-  const theme: { mode: themeMode } = { mode: "dark" };
+  const { theme } = useContext(ThemeContext);
   let activeColor = Colors[theme.mode];
   return (
-    <Link href={`orderDetail/${order?.id}`} asChild>
+    <Link href={`(orderDetail)/${order?.id}`} asChild>
       <TouchableOpacity>
         <View style={[styles.container]}>
           <View style={{ flex: 1 }}>

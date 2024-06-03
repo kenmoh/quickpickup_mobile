@@ -1,24 +1,25 @@
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
-} from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "react-native-reanimated";
 import FlashMessage from "react-native-flash-message";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
-
-import { useColorScheme } from "@/hooks/useColorScheme";
+import { ThemeContext, ThemeModeType } from "@/context/themeContext";
+import { getTheme, storeTheme } from "@/auth/storage";
+import AuthProvider from "@/components/AuthProvider";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 const queryClient = new QueryClient();
 
+type ThemeMode = {
+  mode: "dark" | "light";
+};
+
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
+  const [theme, setTheme] = useState<ThemeMode>({ mode: "light" });
+
   const [loaded, error] = useFonts({
     "Poppins-Black": require("../assets/fonts/Poppins-Black.ttf"),
     "Poppins-Bold": require("../assets/fonts/Poppins-Bold.ttf"),
@@ -30,6 +31,35 @@ export default function RootLayout() {
     "Poppins-SemiBold": require("../assets/fonts/Poppins-SemiBold.ttf"),
     "Poppins-Thin": require("../assets/fonts/Poppins-Thin.ttf"),
   });
+
+  const toggleTheme = ({ newTheme }: { newTheme: { mode: ThemeModeType } }) => {
+    let mode: ThemeModeType;
+    if (newTheme) {
+      mode = theme.mode === "dark" ? "light" : "dark";
+      newTheme = { mode };
+    }
+    setTheme(newTheme);
+    storeTheme("appTheme", newTheme.mode);
+  };
+
+  const getStoredTheme = async () => {
+    try {
+      const storedTheme = await getTheme("appTheme");
+      if (storedTheme) {
+        toggleTheme({ newTheme: storedTheme });
+      }
+    } catch (error) {
+      throw error;
+    } finally {
+      setTimeout(() => {
+        SplashScreen.hideAsync();
+      }, 1000);
+    }
+  };
+
+  useEffect(() => {
+    getStoredTheme();
+  }, []);
 
   useEffect(() => {
     if (error) throw error;
@@ -45,15 +75,22 @@ export default function RootLayout() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <ThemeProvider
-          value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
-        >
-          <Stack>
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-          </Stack>
+        <ThemeContext.Provider value={{ theme, toggleTheme }}>
+          <AuthProvider>
+            <Stack>
+              <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+              <Stack.Screen
+                name="(orderDetail)"
+                options={{
+                  headerShown: false,
+                }}
+              />
+            </Stack>
+          </AuthProvider>
+
           <FlashMessage position={"bottom"} />
-        </ThemeProvider>
+        </ThemeContext.Provider>
       </QueryClientProvider>
     </>
   );

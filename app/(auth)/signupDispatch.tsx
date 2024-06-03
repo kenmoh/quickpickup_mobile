@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import AccountLinkText from "@/components/AcountLink";
 import CustomBtn from "@/components/CustomBtn";
 import CustomTextInput from "@/components/CustomTextInput";
@@ -16,9 +17,10 @@ import { CreateDispatch } from "@/utils/types";
 import { router } from "expo-router";
 import { Formik } from "formik";
 import { Colors, themeMode } from "@/constants/Colors";
+import { ThemeContext } from "@/context/themeContext";
 
 const SignUpDispatch = () => {
-  const theme: { mode: themeMode } = { mode: "dark" };
+  const { theme } = useContext(ThemeContext);
   let activeColor = Colors[theme.mode];
   const { error, isSuccess, mutate, isPending } = useMutation({
     mutationFn: (user: CreateDispatch) => usersApi.createDispatch(user),
@@ -60,7 +62,7 @@ const SignUpDispatch = () => {
             flex: 1,
             width: "100%",
             borderRadius: 10,
-            padding: 20,
+
             backgroundColor: activeColor.background,
           }}
         >
@@ -80,84 +82,94 @@ const SignUpDispatch = () => {
             {({ handleChange, handleSubmit, values, errors, touched }) => (
               <>
                 <CustomActivityIndicator visible={isPending} />
-                <CustomTextInput
-                  label="Email"
-                  autoCapitalize="none"
-                  keyboardType="email-address"
-                  onChangeText={handleChange("email")}
-                  labelColor={activeColor.text}
-                  inputBackgroundColor={activeColor.inputBackground}
-                  inputTextColor={activeColor.text}
-                  value={values.email}
-                />
-                {touched.email && errors.email && (
-                  <InputErrorMessage error={errors.email} />
-                )}
-                <CustomTextInput
-                  label="Phone Number"
-                  keyboardType="phone-pad"
-                  onChangeText={handleChange("phoneNumber")}
-                  labelColor={activeColor.text}
-                  inputBackgroundColor={activeColor.inputBackground}
-                  inputTextColor={activeColor.text}
-                  value={values.phoneNumber}
-                />
-                {touched.phoneNumber && errors.phoneNumber && (
-                  <InputErrorMessage error={errors.phoneNumber} />
-                )}
-                <CustomTextInput
-                  label="Company Name"
-                  onChangeText={handleChange("companyName")}
-                  labelColor={activeColor.text}
-                  inputBackgroundColor={activeColor.inputBackground}
-                  inputTextColor={activeColor.text}
-                  value={values.companyName}
-                />
-                {touched.companyName && errors.companyName && (
-                  <InputErrorMessage error={errors.companyName} />
-                )}
-                <CustomTextInput
-                  label="Company Reg No."
-                  onChangeText={handleChange("companyRegNum")}
-                  labelColor={activeColor.text}
-                  inputBackgroundColor={activeColor.inputBackground}
-                  inputTextColor={activeColor.text}
-                  value={values.companyRegNum}
-                />
-                {touched.companyRegNum && errors.companyRegNum && (
-                  <InputErrorMessage error={errors.companyRegNum} />
-                )}
-                <CustomTextInput
-                  label="Password"
-                  autoCapitalize="none"
-                  secureTextEntry={true}
-                  onChangeText={handleChange("password")}
-                  labelColor={activeColor.text}
-                  inputBackgroundColor={activeColor.inputBackground}
-                  inputTextColor={activeColor.text}
-                  value={values.password}
-                />
-                {touched.password && errors.password && (
-                  <InputErrorMessage error={errors.password} />
-                )}
-                <CustomTextInput
-                  label="Confirm Passord"
-                  secureTextEntry={true}
-                  onChangeText={handleChange("confirmPassword")}
-                  value={values.confirmPassword}
-                  labelColor={activeColor.text}
-                  inputBackgroundColor={activeColor.inputBackground}
-                  inputTextColor={activeColor.text}
-                />
-                {touched.confirmPassword && errors.confirmPassword && (
-                  <InputErrorMessage error={errors.confirmPassword} />
-                )}
-                <CustomBtn
-                  btnColor="#0000CD"
-                  label="Sign Up"
-                  btnBorderRadius={10}
-                  onPress={handleSubmit}
-                />
+                <View style={{ padding: 20 }}>
+                  <CustomTextInput
+                    label="Email"
+                    hasBorder={theme.mode !== "dark"}
+                    autoCapitalize="none"
+                    keyboardType="email-address"
+                    onChangeText={handleChange("email")}
+                    labelColor={activeColor.text}
+                    inputBackgroundColor={activeColor.inputBackground}
+                    inputTextColor={activeColor.text}
+                    value={values.email}
+                  />
+                  {touched.email && errors.email && (
+                    <InputErrorMessage error={errors.email} />
+                  )}
+                  <CustomTextInput
+                    label="Phone Number"
+                    hasBorder={theme.mode !== "dark"}
+                    keyboardType="phone-pad"
+                    onChangeText={handleChange("phoneNumber")}
+                    labelColor={activeColor.text}
+                    inputBackgroundColor={activeColor.inputBackground}
+                    inputTextColor={activeColor.text}
+                    value={values.phoneNumber}
+                  />
+                  {touched.phoneNumber && errors.phoneNumber && (
+                    <InputErrorMessage error={errors.phoneNumber} />
+                  )}
+                  <CustomTextInput
+                    label="Company Name"
+                    hasBorder={theme.mode !== "dark"}
+                    onChangeText={handleChange("companyName")}
+                    labelColor={activeColor.text}
+                    inputBackgroundColor={activeColor.inputBackground}
+                    inputTextColor={activeColor.text}
+                    value={values.companyName}
+                  />
+                  {touched.companyName && errors.companyName && (
+                    <InputErrorMessage error={errors.companyName} />
+                  )}
+                  <CustomTextInput
+                    label="Company Reg No."
+                    hasBorder={theme.mode !== "dark"}
+                    onChangeText={handleChange("companyRegNum")}
+                    labelColor={activeColor.text}
+                    inputBackgroundColor={activeColor.inputBackground}
+                    inputTextColor={activeColor.text}
+                    value={values.companyRegNum}
+                  />
+                  {touched.companyRegNum && errors.companyRegNum && (
+                    <InputErrorMessage error={errors.companyRegNum} />
+                  )}
+                  <CustomTextInput
+                    label="Password"
+                    hasBorder={theme.mode !== "dark"}
+                    autoCapitalize="none"
+                    secureTextEntry={true}
+                    onChangeText={handleChange("password")}
+                    labelColor={activeColor.text}
+                    inputBackgroundColor={activeColor.inputBackground}
+                    inputTextColor={activeColor.text}
+                    value={values.password}
+                  />
+                  {touched.password && errors.password && (
+                    <InputErrorMessage error={errors.password} />
+                  )}
+                  <CustomTextInput
+                    label="Confirm Passord"
+                    hasBorder={theme.mode !== "dark"}
+                    secureTextEntry={true}
+                    onChangeText={handleChange("confirmPassword")}
+                    value={values.confirmPassword}
+                    labelColor={activeColor.text}
+                    inputBackgroundColor={activeColor.inputBackground}
+                    inputTextColor={activeColor.text}
+                  />
+                  {touched.confirmPassword && errors.confirmPassword && (
+                    <InputErrorMessage error={errors.confirmPassword} />
+                  )}
+                  <View style={{ marginVertical: 20 }}>
+                    <CustomBtn
+                      btnColor={Colors.btnPrimaryColor}
+                      label="Sign Up"
+                      btnBorderRadius={10}
+                      onPress={handleSubmit}
+                    />
+                  </View>
+                </View>
               </>
             )}
           </Formik>

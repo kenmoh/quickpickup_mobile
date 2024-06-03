@@ -1,16 +1,19 @@
-import { Text, StyleSheet, ScrollView, View } from "react-native";
+import { StyleSheet, ScrollView, View } from "react-native";
+import { StatusBar } from "expo-status-bar";
+import { Formik } from "formik";
+import ImagePickerForm from "@/components/ImageFormPicker";
+
 import CustomBtn from "@/components/CustomBtn";
 import { Colors, themeMode } from "@/constants/Colors";
 import CustomTextInput from "@/components/CustomTextInput";
-import AppImagePicker from "@/components/AppImagePicker";
-import { Formik } from "formik";
 import { orderValidationSchema } from "@/utils/orderValidation";
-import ImagePickerForm from "@/components/ImageFormPicker";
 import InputErrorMessage from "@/components/InputErrorMessage";
-import { StatusBar } from "expo-status-bar";
+
+import { ThemeContext } from "@/context/themeContext";
+import { useContext } from "react";
 
 export default function HomeScreen() {
-  const theme: { mode: themeMode } = { mode: "dark" };
+  const { theme } = useContext(ThemeContext);
   let activeColor = Colors[theme.mode];
   return (
     <View
@@ -113,7 +116,6 @@ export default function HomeScreen() {
                       <CustomBtn
                         label="submit"
                         btnBorderRadius={5}
-                        // btnColor="#0000CD"
                         btnColor="orange"
                         onPress={handleSubmit}
                       />
